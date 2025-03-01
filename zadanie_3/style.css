@@ -25,8 +25,8 @@ body {
 .button {
   width: 100%;
   justify-content: center;
-  background-color: rgba(20, 173, 56, 0.674);
-  color: #ddd;
+  background-color: aliceblue;
+  color: #eee;
   font-size: 18px;
 }
 
