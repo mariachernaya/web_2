@@ -9,7 +9,7 @@ body {
 .form {
   margin: 40px 0;
   padding: 35px 70px;
-  border: 4px solid aliceblue;
+  border: 20px solid aliceblue;
 }
 
 .head {
@@ -26,7 +26,7 @@ body {
   width: 100%;
   justify-content: center;
   background-color: aliceblue;
-  color: #eee;
+  color: #aaa;
   font-size: 18px;
 }
 
