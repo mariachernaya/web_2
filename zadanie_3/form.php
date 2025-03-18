@@ -1,4 +1,13 @@
-<form action="" method="POST" class="form">
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <title>№3</title>
+  </head>
+  <body>
+	  <form action="" method="POST" class="form">
     <div>
       <div class="head">
         <h2><b>Форма обратной связи</b></h2>
