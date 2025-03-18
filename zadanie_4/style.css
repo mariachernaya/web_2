@@ -34,7 +34,7 @@ body {
 select {
   width: 100%;
   outline: none;
-  border: 5px solid black;
+  border: 5px  black;
 }
 
 .mess {
