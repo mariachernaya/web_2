@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="bootstrap.min.css" />
-    <title>Задание_4</title>
+    <title>№4</title>
   </head>
 
   <body>
