@@ -20,14 +20,14 @@ body {
   height: 55px;
   width: 400px;
   margin: 6px 0;
-  border: 5px solid black;
+  border: 2px solid black;
 }
 
 .button {
   width: 100%;
   justify-content: center;
   background-color: aliceblue;
-  color: #fff;
+  color: #000000;
   font-size: 20px;
 }
 
