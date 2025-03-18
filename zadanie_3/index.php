@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="bootstrap.min.css" />
-    <title>№3</title>
-  </head>
-  <body>
 <?php
 header('Content-Type: text/html; charset=UTF-8');
 
