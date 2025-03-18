@@ -1,15 +1,15 @@
 body {
   height: 100%;
-  font-size: 15px;
+  font-size: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
 }
 
 .form {
   margin: 40px 0;
   padding: 35px 70px;
-  border: 4px solid rgba(20, 173, 56, 0.674);
+  border: 4px solid aliceblue;
 }
 
 .head {
@@ -17,7 +17,7 @@ body {
 }
 
 .input {
-  height: 50px;
+  height: 55px;
   width: 400px;
   margin: 6px 0;
   border: 5px solid black;
@@ -26,9 +26,9 @@ body {
 .button {
   width: 100%;
   justify-content: center;
-  background-color: rgba(20, 173, 56, 0.674);
+  background-color: aliceblue;
   color: #fff;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 select {
