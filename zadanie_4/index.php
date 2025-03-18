@@ -50,9 +50,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
         check_pole('bio', 'Слишком длинное поле, максимум символов - 65535', strlen($bio) > 65535);
     check_pole('check', 'Не ознакомлены с контрактом', empty($check));
 
-	$user = 'u68791'; 
-	$pass = '1609462'; 
-	$db = new PDO('mysql:host=localhost;dbname=u68791', $user, $pass,
+	$user = 'u68790'; 
+	$pass = '4247220'; 
+	$db = new PDO('mysql:host=localhost;dbname=u68790', $user, $pass,
 	[PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); 
 
     $inQuery = implode(',', array_fill(0, count($language), '?'));
