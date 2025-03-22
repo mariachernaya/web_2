@@ -87,7 +87,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
         setcookie('check_error', '', time() - 30 * 24 * 60 * 60);
         try
         {
-            $stmt = $db->prepare("INSERT INTO form_data (fio, number, email, date, radio, bio) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt = $db->prepare("INSERT INTO form_data (fio, number, email, dat, radio, bio) VALUES (?, ?, ?, ?, ?, ?)");
             $stmt->execute([$fio, $number, $email, date("jS \of F Y",strtotime($date)), $radio, $bio]);
             $fid = $db->lastInsertId();
             $stmt1 = $db->prepare("INSERT INTO form_data_lang (id_form, id_lang) VALUES (?, ?)");
