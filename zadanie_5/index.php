@@ -1,14 +1,34 @@
 <?php
 
 $db;
-// подключение к базе данных
-include ('database.php');
-// отправка браузеру кодировку
+	$user = 'u68790'; 
+	$pass = '4247220'; 
+	$db = new PDO('mysql:host=localhost;dbname=u68791', $user, $pass,
+	[PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); 
+
 header("Content-Type: text/html; charset=UTF-8");
 session_start();
 
 $error = false;
 $log = !empty($_SESSION['login']);
+
+ function check($cook, $str, $flag)
+    {
+        global $error;
+        $res = false;
+        $setval = isset($_POST[$cook]) ? $_POST[$cook] : '';
+        if ($flag) {
+            setcookie($cook . '_error', $str, time() + 24 * 60 * 60);
+            $error = true;
+            $res = true;
+        }
+        if ($cook == 'language') {
+            global $language;
+            $setval = ($language != '') ? implode(",", $language) : '';
+        }
+        setcookie($cook . '_value', $setval, time() + 30 * 24 * 60 * 60);
+        return $res;
+    }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	
@@ -36,41 +56,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header('Location: ./');
         exit();
     }
-	// функция проверки полей
-    function check_field($cook, $str, $flag)
-    {
-        global $error;
-        $res = false;
-        $setval = isset($_POST[$cook]) ? $_POST[$cook] : '';
-        if ($flag) {
-            setcookie($cook . '_error', $str, time() + 24 * 60 * 60);
-            $error = true;
-            $res = true;
-        }
-        if ($cook == 'language') {
-            global $language;
-            $setval = ($language != '') ? implode(",", $language) : '';
-        }
-        setcookie($cook . '_value', $setval, time() + 30 * 24 * 60 * 60);
-        return $res;
-    }
 
-    if (!check_field('fio', 'Это поле пустое', empty($fio)))
-        check_field('fio', 'Неправильный формат: Имя Фамилия, только кириллица', !preg_match('/^([а-яё]+-?[а-яё]+)( [а-яё]+-?[а-яё]+){1,2}$/Diu', $fio));
-    if (!check_field('number', 'Это поле пустое', empty($number))) {
-        check_field('number', 'Неправильный формат телефона', strlen($number) != 11);
-        check_field('number', 'Поле должно содержать только цифры, начиная с 8', $number != preg_replace('/\D/', '', $number));
+    if (!check('fio', 'Это поле пустое', empty($fio)))
+        check('fio', 'Неправильный формат: Имя Фамилия, только кириллица', !preg_match('/^([а-яё]+-?[а-яё]+)( [а-яё]+-?[а-яё]+){1,2}$/Diu', $fio));
+    if (!check('number', 'Это поле пустое', empty($number))) {
+        check('number', 'Неправильный формат телефона', strlen($number) != 11);
+        check('number', 'Поле должно содержать только цифры, начиная с 8', $number != preg_replace('/\D/', '', $number));
     }
-    if (!check_field('email', 'Это поле пустое', empty($email)))
-        check_field('email', 'Неправильный формат: example@mail.ru', !preg_match('/^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/', $email));
-    if (!check_field('date', 'Это поле пустое', empty($date)))
-        check_field('date', 'Неверная дата', strtotime('now') < strtotime($date));
-    check_field('radio', "Не выбран пол", empty($radio) || !preg_match('/^(M|W)$/', $radio));
-    if (!check_field('bio', 'Это поле пустое', empty($bio)))
-        check_field('bio', 'Слишком длинное поле', strlen($bio) > 65535);
-    check_field('check', 'Не ознакомлены с контрактом', empty($check));
+    if (!check('email', 'Это поле пустое', empty($email)))
+        check('email', 'Неправильный формат: example@mail.ru', !preg_match('/^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/', $email));
+    if (!check('date', 'Это поле пустое', empty($date)))
+        check('date', 'Неверная дата', strtotime('now') < strtotime($date));
+    check('radio', "Не выбран пол", empty($radio) || !preg_match('/^(M|W)$/', $radio));
+    if (!check('bio', 'Это поле пустое', empty($bio)))
+        check('bio', 'Слишком длинное поле', strlen($bio) > 65535);
+    check('check', 'Не ознакомлены с контрактом', empty($check));
 
-    if (!check_field('language', 'Не выбран язык', empty($language))) {
+    if (!check('language', 'Не выбран язык', empty($language))) {
         try {
             $inQuery = implode(',', array_fill(0, count($language), '?'));
             $dbLangs = $db->prepare("SELECT id, name FROM languages WHERE name IN ($inQuery)");
@@ -82,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             print ('Error : ' . $e->getMessage());
             exit();
         }
-        check_field('language', 'Неверно выбраны языки', $dbLangs->rowCount() != count($language));
+        check('language', 'Неверно выбраны языки', $dbLangs->rowCount() != count($language));
     }
 
     if (!$error) {
@@ -160,7 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $values[$str] = empty($pole) ? '' : strip_tags($pole);
     }
 
-    function check_field($str, $pole)
+    function check($str, $pole)
     {
         global $errors, $messages, $values, $error;
         if ($error)
@@ -183,14 +185,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             и паролем <strong>%s</strong> для изменения данных.', strip_tags($_COOKIE['login']), strip_tags($_COOKIE['pass']));
     }
 
-    check_field('fio', $fio);
-    check_field('number', $number);
-    check_field('email', $email);
-    check_field('date', $date);
-    check_field('radio', $radio);
-    check_field('language', $language);
-    check_field('bio', $bio);
-    check_field('check', $check);
+    check('fio', $fio);
+    check('number', $number);
+    check('email', $email);
+    check('date', $date);
+    check('radio', $radio);
+    check('language', $language);
+    check('bio', $bio);
+    check('check', $check);
 
     $languages = explode(',', $values['language']);
 	// вставка значений после авторизации 
