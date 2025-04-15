@@ -1,6 +1,6 @@
 <?php
 
-$db;
+	$db;
 	$user = 'u68790'; 
 	$pass = '4247220'; 
 	$db = new PDO('mysql:host=localhost;dbname=u68790', $user, $pass,
@@ -12,23 +12,7 @@ session_start();
 $error = false;
 $log = !empty($_SESSION['login']);
 
- function check($cook, $str, $flag)
-    {
-        global $error;
-        $res = false;
-        $setval = isset($_POST[$cook]) ? $_POST[$cook] : '';
-        if ($flag) {
-            setcookie($cook . '_error', $str, time() + 24 * 60 * 60);
-            $error = true;
-            $res = true;
-        }
-        if ($cook == 'language') {
-            global $language;
-            $setval = ($language != '') ? implode(",", $language) : '';
-        }
-        setcookie($cook . '_value', $setval, time() + 30 * 24 * 60 * 60);
-        return $res;
-    }
+ 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	
@@ -56,7 +40,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header('Location: ./');
         exit();
     }
-
+function check($cook, $str, $flag)
+    {
+        global $error;
+        $res = false;
+        $setval = isset($_POST[$cook]) ? $_POST[$cook] : '';
+        if ($flag) {
+            setcookie($cook . '_error', $str, time() + 24 * 60 * 60);
+            $error = true;
+            $res = true;
+        }
+        if ($cook == 'language') {
+            global $language;
+            $setval = ($language != '') ? implode(",", $language) : '';
+        }
+        setcookie($cook . '_value', $setval, time() + 30 * 24 * 60 * 60);
+        return $res;
+    }
     if (!check('fio', 'Это поле пустое', empty($fio)))
         check('fio', 'Неправильный формат: Имя Фамилия, только кириллица', !preg_match('/^([а-яё]+-?[а-яё]+)( [а-яё]+-?[а-яё]+){1,2}$/Diu', $fio));
     if (!check('number', 'Это поле пустое', empty($number))) {
