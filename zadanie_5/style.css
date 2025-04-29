@@ -9,7 +9,7 @@ body {
 .form {
   margin: 40px 0;
   padding: 35px 70px;
-  border: 4px solid rgba(30, 180, 56, 0.674);
+  border: 20px solid aliceblue;
 }
 
 .head {
@@ -26,8 +26,7 @@ body {
 .button {
   width: 100%;
   justify-content: center;
-  background-color: rgba(50, 180, 56, 0.674);
-  color: #fff;
+  background-color: lemonchiffon;
   font-size: 18px;
   border: 1px solid black;
   margin-bottom: 10px;
@@ -69,8 +68,7 @@ select {
   box-sizing: border-box;
   padding: 3px;
   text-align: center;
-  background-color: rgba(20, 173, 56, 0.674);
-  color: #fff;
+  background-color: lemonchiffon;
   font-size: 18px;
   border: 1px solid black;
 }
