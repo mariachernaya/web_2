@@ -1,8 +1,8 @@
 <?php
 
-ini_set('display_errors', 0);
-ini_set('log_errors', 1);
-ini_set('error_log', __DIR__ . '/php-errors.log');
+// ini_set('display_errors', 0);
+// ini_set('log_errors', 1);
+// ini_set('error_log', __DIR__ . '/php-errors.log');
 
 $db;
 include ('database.php');
@@ -23,26 +23,26 @@ if (!isset($_SESSION['csrf_token'])) {
 }
 
 // Функция для санитизации входных данных
-function sanitizeInput($input, $type = 'string') {
-    if (is_array($input)) {
-        return array_map('sanitizeInput', $input);
-    }
-    switch ($type) {
-        case 'int':
-            return filter_var($input, FILTER_SANITIZE_NUMBER_INT);
-        case 'email':
-            return filter_var($input, FILTER_SANITIZE_EMAIL);
-        case 'string':
-        default:
-            return htmlspecialchars(strip_tags($input), ENT_QUOTES | ENT_HTML5, 'UTF-8');
-    }
-}
+// function sanitizeInput($input, $type = 'string') {
+//     if (is_array($input)) {
+//         return array_map('sanitizeInput', $input);
+//     }
+//     switch ($type) {
+//         case 'int':
+//             return filter_var($input, FILTER_SANITIZE_NUMBER_INT);
+//         case 'email':
+//             return filter_var($input, FILTER_SANITIZE_EMAIL);
+//         case 'string':
+//         default:
+//             return htmlspecialchars(strip_tags($input), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+//     }
+// }
 
 // Проверка URI
-if (strpos($_SERVER['REQUEST_URI'], 'index.php') === false) {
-    header('Location: index.php');
-    exit();
-}
+// if (strpos($_SERVER['REQUEST_URI'], 'index.php') === false) {
+//     header('Location: index.php');
+//     exit();
+// }
 
 $error = false;
 $log = isset($_SESSION['login']);
@@ -57,10 +57,10 @@ if ($adminLog && preg_match('/^[0-9]+$/', $getUid)) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // CSRF защита
-    if (!isset($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
-        error_log('CSRF token validation failed');
-        die('Неверный токен безопасности. Пожалуйста, отправьте форму еще раз.');
-    }
+    // if (!isset($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+    //     error_log('CSRF token validation failed');
+    //     die('Неверный токен безопасности. Пожалуйста, отправьте форму еще раз.');
+    // }
 
     $fio = isset($_POST['fio']) ? sanitizeInput($_POST['fio']) : '';
     $number = isset($_POST['number']) ? sanitizeInput($_POST['number']) : '';
