@@ -10,6 +10,7 @@
 
 <body>
   <form action="" method="post" class="form">
+       <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token'] ?? '', ENT_QUOTES); ?>">
     <div class="head">
       <h2><b>Форма обратной связи</b></h2>
     </div>
