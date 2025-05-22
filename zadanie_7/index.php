@@ -1,21 +1,21 @@
 <?php
 
-// ini_set('display_errors', 0);
-// ini_set('log_errors', 1);
-// ini_set('error_log', __DIR__ . '/php-errors.log');
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/php-errors.log');
 
 $db;
 include ('database.php');
 header("Content-Type: text/html; charset=UTF-8");
 
-// session_set_cookie_params([
-//     'lifetime' => 0,
-//     'path' => '/',
-//     'domain' => $_SERVER['HTTP_HOST'],
-//     'secure' => true,
-//     'httponly' => true,
-//     'samesite' => 'Strict'
-// ]);
+session_set_cookie_params([
+    'lifetime' => 0,
+    'path' => '/',
+    'domain' => $_SERVER['HTTP_HOST'],
+    'secure' => true,
+    'httponly' => true,
+    'samesite' => 'Strict'
+]);
 session_start();
 
 if (!isset($_SESSION['csrf_token'])) {
@@ -23,26 +23,26 @@ if (!isset($_SESSION['csrf_token'])) {
 }
 
 // Функция для санитизации входных данных
-// function sanitizeInput($input, $type = 'string') {
-//     if (is_array($input)) {
-//         return array_map('sanitizeInput', $input);
-//     }
-//     switch ($type) {
-//         case 'int':
-//             return filter_var($input, FILTER_SANITIZE_NUMBER_INT);
-//         case 'email':
-//             return filter_var($input, FILTER_SANITIZE_EMAIL);
-//         case 'string':
-//         default:
-//             return htmlspecialchars(strip_tags($input), ENT_QUOTES | ENT_HTML5, 'UTF-8');
-//     }
-// }
+function sanitizeInput($input, $type = 'string') {
+    if (is_array($input)) {
+        return array_map('sanitizeInput', $input);
+    }
+    switch ($type) {
+        case 'int':
+            return filter_var($input, FILTER_SANITIZE_NUMBER_INT);
+        case 'email':
+            return filter_var($input, FILTER_SANITIZE_EMAIL);
+        case 'string':
+        default:
+            return htmlspecialchars(strip_tags($input), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    }
+}
 
 // Проверка URI
-// if (strpos($_SERVER['REQUEST_URI'], 'index.php') === false) {
-//     header('Location: index.php');
-//     exit();
-// }
+if (strpos($_SERVER['REQUEST_URI'], 'index.php') === false) {
+    header('Location: index.php');
+    exit();
+}
 
 $error = false;
 $log = isset($_SESSION['login']);
