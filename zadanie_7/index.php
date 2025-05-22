@@ -1,22 +1,21 @@
 <?php
 
-// ini_set('display_errors', 0);
-// ini_set('log_errors', 1);
-// ini_set('error_log', __DIR__ . '/php-errors.log');
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/php-errors.log');
 
 $db;
 include ('database.php');
 header("Content-Type: text/html; charset=UTF-8");
 
-// Усиленные настройки сессии
-session_set_cookie_params([
-    'lifetime' => 0,
-    'path' => '/',
-    'domain' => $_SERVER['HTTP_HOST'],
-    'secure' => true,
-    'httponly' => true,
-    'samesite' => 'Strict'
-]);
+// session_set_cookie_params([
+//     'lifetime' => 0,
+//     'path' => '/',
+//     'domain' => $_SERVER['HTTP_HOST'],
+//     'secure' => true,
+//     'httponly' => true,
+//     'samesite' => 'Strict'
+// ]);
 session_start();
 
 if (!isset($_SESSION['csrf_token'])) {
