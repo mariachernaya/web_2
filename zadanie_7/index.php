@@ -48,6 +48,11 @@ if ($adminLog && preg_match('/^[0-9]+$/', $getUid)) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if (!isset($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+        error_log('CSRF token validation failed');
+        die('Неверный токен безопасности. Пожалуйста, отправьте форму еще раз.');
+    }
+
     $fio = isset($_POST['fio']) ? $_POST['fio'] : '';
     $number = isset($_POST['number']) ? $_POST['number'] : '';
     $email = isset($_POST['email']) ? $_POST['email'] : '';
