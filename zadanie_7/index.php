@@ -21,6 +21,20 @@ if (strpos($_SERVER['REQUEST_URI'], 'index.php') === false) {
     header('Location: index.php');
     exit();
 }
+function sanitizeInput($input, $type = 'string') {
+    if (is_array($input)) {
+        return array_map('sanitizeInput', $input);
+    }
+    switch ($type) {
+        case 'int':
+            return filter_var($input, FILTER_SANITIZE_NUMBER_INT);
+        case 'email':
+            return filter_var($input, FILTER_SANITIZE_EMAIL);
+        case 'string':
+        default:
+            return htmlspecialchars(strip_tags($input), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    }
+}
 
 $error = false;
 $log = isset($_SESSION['login']);
