@@ -6,6 +6,15 @@ ini_set('error_log', __DIR__ . '/php-errors.log');
 $db;
 include ('database.php');
 header("Content-Type: text/html; charset=UTF-8");
+session_set_cookie_params([
+    'lifetime' => 0,
+    'path' => '/',
+    'domain' => $_SERVER['HTTP_HOST'],
+    'secure' => true,
+    'httponly' => true,
+    'samesite' => 'Strict'
+]);
+
 session_start();
 
 if (strpos($_SERVER['REQUEST_URI'], 'index.php') === false) {
