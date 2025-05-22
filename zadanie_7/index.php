@@ -253,17 +253,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (!empty($_COOKIE['save'])) {
         setcookie('save', '', time() - 30 * 24 * 60 * 60, '/', $_SERVER['HTTP_HOST'], true, true);
-        setcookie('login', '', time() - 30 * 24 * 60 * 60, '/', $_SERVER['HTTP_HOST'], true, true);
-        setcookie('pass', '', time() - 30 * 24 * 60 * 60, '/', $_SERVER['HTTP_HOST'], true, true);
+       
         $messages['success'] = 'Спасибо, результаты сохранены.';
-        if (!empty($_COOKIE['pass'])) {
+        if (!empty($_COOKIE['pass'])  && !empty($_COOKIE['login'])) {
             $messages['info'] = sprintf(
                 'Вы можете <a href="login.php">войти</a> с логином <strong>%s</strong><br>
                 и паролем <strong>%s</strong> для изменения данных.',
                 sanitizeInput($_COOKIE['login']),
                 sanitizeInput($_COOKIE['pass'])
             );
-        }
+         setcookie('login', '', time() - 30 * 24 * 60 * 60, '/', $_SERVER['HTTP_HOST'], true, true);
+        setcookie('pass', '', time() - 30 * 24 * 60 * 60, '/', $_SERVER['HTTP_HOST'], true, true);}
     }
 
     check_pole('fio', $fio);
